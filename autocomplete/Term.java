@@ -44,4 +44,10 @@ public class Term implements Comparable<Term> {
     public String toString() {
         return String.format("%f \t %s", w, q);
     }
+    
+    public static void main(String[] args) {
+        Term t1 = new Term("query1", 10);
+        Term t2 = new Term("query2", 7);
+        Term t3 = new Term("query3", 1);
+    }
 }
