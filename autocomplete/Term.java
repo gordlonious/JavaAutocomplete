@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package autocomplete;
+import java.util.Arrays;
 import java.util.Comparator;
 /**
  *
@@ -29,10 +30,20 @@ public class Term implements Comparable<Term> {
     }
 
     // Compare the terms in descending order by weight.
-    //public static Comparator<Term> byReverseWeightOrder = (a, b) -> { return a.compareTo(b); };  // TODO
+    public static Comparator<Term> byReverseWeightOrder = (a, b) -> { return new Double (b.getWeight()).compareTo(a.getWeight()); };
 
     // Compare the terms in lexicographic order but using only the first r characters of each query.
-    //public static Comparator<Term> byPrefixOrder(int r) = (r) -> { return return ; }; // TODO
+    public static Comparator<Term> byPrefixOrder(int r) { return new PrefixCompare(r); }
+    
+    public static class PrefixCompare implements Comparator<Term> {
+        private int n;
+        PrefixCompare(int r) { n = r;  }
+        public int compare(Term t1, Term t2) {
+             String st1 = t1.getQuery().substring(0, (n));
+             String st2 = t2.getQuery().substring(0, (n));
+             return st1.compareTo(st2);
+         }
+    }
 
     // Compare the terms in lexicographic order by query.
     public int compareTo(Term that) {
@@ -46,8 +57,26 @@ public class Term implements Comparable<Term> {
     }
     
     public static void main(String[] args) {
-        Term t1 = new Term("query1", 10);
-        Term t2 = new Term("query2", 7);
-        Term t3 = new Term("query3", 1);
+        // test natural order
+        System.out.println("Natural Order Test...");
+        Term t1 = new Term("zanbjds", 10);
+        Term t2 = new Term("zanziyt", 7);
+        Term t3 = new Term("zanadefg", 1);
+        Term[] at = new Term[3];
+        at[0] = t1;
+        at[1] = t2;
+        at[2] = t3;
+        Arrays.sort(at);
+        for(Term t: at) { System.out.println(t); }
+        
+        // test reverse weight order
+        System.out.println("Reverse Weight Order Test...");
+        Arrays.sort(at, Term.byReverseWeightOrder);
+        for(Term t: at) { System.out.println(t); }
+        
+        // test reverse weight order
+        System.out.println("Prefix Order Test...");
+        Arrays.sort(at, Term.byPrefixOrder(3));
+        for(Term t: at) { System.out.println(t); }
     }
 }
