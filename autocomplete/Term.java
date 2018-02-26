@@ -30,17 +30,20 @@ public class Term implements Comparable<Term> {
     }
 
     // Compare the terms in descending order by weight.
-    public static Comparator<Term> byReverseWeightOrder = (a, b) -> { return new Double (b.getWeight()).compareTo(a.getWeight()); };
+    public static Comparator<Term> byReverseWeightOrder = (a, b) -> { return new Double (b.getWeight()).compareTo(a.getWeight()); }; // Java 8 syntax
 
     // Compare the terms in lexicographic order but using only the first r characters of each query.
-    public static Comparator<Term> byPrefixOrder(int r) { return new PrefixCompare(r); }
+    public static Comparator<Term> byPrefixOrder(int r) {
+        if(r < 0) { throw new IllegalArgumentException("no negative paramaters allowed in byPrefixOrder constructor"); }
+        return new PrefixCompare(r); 
+    }
     
     public static class PrefixCompare implements Comparator<Term> {
         private int n;
         PrefixCompare(int r) { n = r;  }
         public int compare(Term t1, Term t2) {
-             String st1 = t1.getQuery().substring(0, (n));
-             String st2 = t2.getQuery().substring(0, (n));
+             String st1 = t1.getQuery().substring(0, n);
+             String st2 = t2.getQuery().substring(0, n);
              return st1.compareTo(st2);
          }
     }
