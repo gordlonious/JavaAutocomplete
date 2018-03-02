@@ -40,6 +40,7 @@ public class Autocomplete {
         String filename = "";
         int numberOfSuggestions = 10;
         AutocompleteGUI ag = new AutocompleteGUI("wiktionary.txt", numberOfSuggestions);
+        ag.setVisible(true);
     }
     
 }
