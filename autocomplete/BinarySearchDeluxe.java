@@ -17,10 +17,16 @@ public class BinarySearchDeluxe {
         int lo = 0;
         int hi = a.length - 1;
         while(lo <= hi) {
-            int mid = lo + (hi - lo) / 2;
+            int mid = (lo + hi) / 2;
             if(comparator.compare(key, a[mid]) < 0) hi = mid -1;
-            else if(comparator.compare(key, a[mid]) > 0) lo = mid + 1;
-            else return mid;
+            else if (comparator.compare(key, a[mid]) > 0) lo = mid + 1;
+            else if (comparator.compare(key, a[mid]) == 0) {
+                while(!(mid < 0) && comparator.compare(key, a[(mid-1)]) == 0) {
+                    mid--;
+                }
+                return mid;
+            }
+            else System.out.println("SHOULD NOT EVER EXECUTE");
         }
         return -1; 
     }
@@ -78,6 +84,24 @@ public class BinarySearchDeluxe {
         int lastIndex = -1;
         lastIndex = lastIndexOf(t2, new Term("Test Data", 50), Term.byReverseWeightOrder);
         System.out.printf("the last index is: %d%n", lastIndex);
+        
+        // Test match results with prefix compare
+        System.out.println("testing first and last index");
+        Term[] t3 = new Term[6];
+        t3[0] = new Term ("Test", 50);
+        t3[1] = new Term("query", 5);
+        t3[2] = new Term("abcd", 100);
+        t3[3] = new Term("abzz", 24);
+        t3[4] = new Term("Wayward Soul", 50);
+        t3[5] = new Term ("Test Data", 50);
+        Term t3Key = new Term("Testzzzzzz", 0);
+        Arrays.sort(t3);
+        for(int i = 0; i < t3.length; i++) {
+            System.out.println(t3[i].toString());
+        }
+        int fI1 = BinarySearchDeluxe.firstIndexOf(t3, t3Key, Term.byPrefixOrder(4));
+        int fI2 = BinarySearchDeluxe.lastIndexOf(t3, t3Key, Term.byPrefixOrder(4));
+        System.out.printf("first index: %d, last index: %d", fI1, fI2);
     }
 
 }

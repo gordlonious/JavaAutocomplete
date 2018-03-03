@@ -44,21 +44,28 @@ public class Term implements Comparable<Term> {
         
         @Override
         public int compare(Term t1, Term t2) {
-            if(t1.getQuery().length() > t2.getQuery().length()) {
+            if(n > t2.getQuery().length()) {
                 System.out.println("Prefix query is bigger than database Term");
-//                return t1.getQuery().compareTo(t2.getQuery());
                 return 1;
             }
-             String st1 = t1.getQuery().substring(0, (n-1));
-             String st2 = t2.getQuery().substring(0, (n-1));
-             return st1.compareTo(st2);
+            String st1;
+            String st2;
+            if(n == 1) {
+                st1 =  Character.toString(t1.getQuery().charAt(0));
+                st2 =  Character.toString(t2.getQuery().charAt(0));
+                return st1.compareTo(st2);
+            } else {
+                st1 = t1.getQuery().substring(0, (n));
+                st2 = t2.getQuery().substring(0, (n));
+                return st1.compareToIgnoreCase(st2);
+            }
          }
     }
 
     // Compare the terms in lexicographic order by query.
     @Override
     public int compareTo(Term that) {
-        return q.compareTo(that.getQuery());
+        return q.compareToIgnoreCase(that.getQuery());
     }
 
     // Return a string representation of the term in the following format:
