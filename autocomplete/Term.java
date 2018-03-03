@@ -44,13 +44,13 @@ public class Term implements Comparable<Term> {
         
         @Override
         public int compare(Term t1, Term t2) {
-            if(t1.getQuery().length() >= t2.getQuery().length()) {
+            if(t1.getQuery().length() > t2.getQuery().length()) {
                 System.out.println("Prefix query is bigger than database Term");
 //                return t1.getQuery().compareTo(t2.getQuery());
                 return 1;
             }
-             String st1 = t1.getQuery().substring(0, n);
-             String st2 = t2.getQuery().substring(0, n);
+             String st1 = t1.getQuery().substring(0, (n-1));
+             String st2 = t2.getQuery().substring(0, (n-1));
              return st1.compareTo(st2);
          }
     }

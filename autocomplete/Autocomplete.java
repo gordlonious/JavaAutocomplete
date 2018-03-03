@@ -28,6 +28,11 @@ public class Autocomplete {
         if(fIndex == -1) System.out.println("Could not find first index of prefix");
         if(lIndex == -1) System.out.println("Could not find last index of prefix");
         if(fIndex == -1 || lIndex == -1) return new Term[0];
+        if(fIndex == lIndex) { 
+            Term[] singleMatch = new Term[1];
+            singleMatch[0] = t[fIndex];
+            return singleMatch;
+        }
         return Arrays.copyOfRange(t, fIndex, lIndex);
     }
     // Return the number of terms that start with the given prefix.
