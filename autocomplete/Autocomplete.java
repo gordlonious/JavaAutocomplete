@@ -33,7 +33,7 @@ public class Autocomplete {
             singleMatch[0] = t[fIndex];
             return singleMatch;
         }
-        return Arrays.copyOfRange(t, fIndex, lIndex);
+        return Arrays.copyOfRange(t, fIndex, (lIndex+1));
     }
     // Return the number of terms that start with the given prefix.
     public int numberOfMatches(String prefix) { 
@@ -60,5 +60,18 @@ public class Autocomplete {
 //              String q = in.readLine();
 //              System.out.println(Arrays.toString())
 //          }
+
+        //figure out copyOfRange
+//        Term[] t1 = new Term[6];
+//        t1[0] = new Term ("Test", 50);
+//        t1[1] = new Term("query", 5);
+//        t1[2] = new Term("abcd", 100);
+//        t1[3] = new Term("abzz", 24);
+//        t1[4] = new Term("Wayward Soul", 50);
+//        t1[5] = new Term ("Test Data", 50);
+//        Term[] t2 = Arrays.copyOfRange(t1, 0, 1);
+//        for (Term trm : t2) {
+//            System.out.println(trm.toString());
+//        }
  } 
 }
