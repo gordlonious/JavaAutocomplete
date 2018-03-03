@@ -41,10 +41,13 @@ public class Term implements Comparable<Term> {
     public static class PrefixCompare implements Comparator<Term> {
         private int n;
         PrefixCompare(int r) { n = r; }
+        
+        @Override
         public int compare(Term t1, Term t2) {
-            if(t1.getQuery().length() <= n) {
-                System.out.println("Trying to compare two strings based on a prefix that is bigger than each string being compared");
-                return 0;
+            if(t1.getQuery().length() >= t2.getQuery().length()) {
+                System.out.println("Prefix query is bigger than database Term");
+//                return t1.getQuery().compareTo(t2.getQuery());
+                return 1;
             }
              String st1 = t1.getQuery().substring(0, n);
              String st2 = t2.getQuery().substring(0, n);
@@ -53,6 +56,7 @@ public class Term implements Comparable<Term> {
     }
 
     // Compare the terms in lexicographic order by query.
+    @Override
     public int compareTo(Term that) {
         return q.compareTo(that.getQuery());
     }
@@ -86,5 +90,10 @@ public class Term implements Comparable<Term> {
         System.out.println("Prefix Order Test...");
         Arrays.sort(at, Term.byPrefixOrder(3));
         for(Term t: at) { System.out.println(t); }
+        
+        // test prefix compare method
+        Term p1 = new Term("pre", 3);
+        Term p2 = new Term("prefix", 9);  // p1 and p2 should match
+        System.out.printf("are equal: %d%n", Term.byPrefixOrder(3).compare(p1, p2));
     }
 }

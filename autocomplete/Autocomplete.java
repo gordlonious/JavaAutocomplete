@@ -18,6 +18,7 @@ public class Autocomplete {
     // Initialize the data structure from the given array of terms.
     public Autocomplete(Term[] terms) {
         t = terms;
+        Arrays.sort(t);
     }
     
     // Return all terms that start with the given prefix, in descending order of weight.
