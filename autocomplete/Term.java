@@ -40,8 +40,12 @@ public class Term implements Comparable<Term> {
     
     public static class PrefixCompare implements Comparator<Term> {
         private int n;
-        PrefixCompare(int r) { n = r;  }
+        PrefixCompare(int r) { n = r; }
         public int compare(Term t1, Term t2) {
+            if(t1.getQuery().length() <= n) {
+                System.out.println("Trying to compare two strings based on a prefix that is bigger than each string being compared");
+                return 0;
+            }
              String st1 = t1.getQuery().substring(0, n);
              String st2 = t2.getQuery().substring(0, n);
              return st1.compareTo(st2);
@@ -55,6 +59,7 @@ public class Term implements Comparable<Term> {
 
     // Return a string representation of the term in the following format:
     // the weight, followed by a tab, followed by the query.
+    @Override
     public String toString() {
         return String.format("%f \t %s", w, q);
     }

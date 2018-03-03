@@ -35,13 +35,18 @@ public class BinarySearchDeluxe {
             if(comparator.compare(key, a[mid]) < 0) hi = mid - 1;
             else if(comparator.compare(key, a[mid]) > 0) lo = mid + 1;
             else {
-                while(comparator.compare(key, a[(mid+1)]) == 0) {
+                while(!(mid == (a.length-1)) && comparator.compare(key, a[(mid+1)]) == 0) {
                     mid++;
                 }
                 return mid;
             }
         }
         return -1; 
+     }
+     
+     private static boolean isEnd(Term[] a, int index) {
+         if (index == (a.length - 1)) return true;
+         else return false;
      }
     
     public static void main(String[] args) {

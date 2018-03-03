@@ -6,6 +6,7 @@
 package autocomplete;
 
 import java.util.Arrays;
+import edu.princeton.cs.algs4.In;
 
 /**
  *
@@ -23,12 +24,16 @@ public class Autocomplete {
     public Term[] allMatches(String prefix) { 
         int fIndex = BinarySearchDeluxe.firstIndexOf(t, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         int lIndex = BinarySearchDeluxe.lastIndexOf(t, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        if(fIndex == -1) System.out.println("Could not find first index of prefix");
+        if(lIndex == -1) System.out.println("Could not find last index of prefix");
+        if(fIndex == -1 || lIndex == -1) return new Term[0];
         return Arrays.copyOfRange(t, fIndex, lIndex);
     }
     // Return the number of terms that start with the given prefix.
     public int numberOfMatches(String prefix) { 
         int fIndex = BinarySearchDeluxe.firstIndexOf(t, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         int lIndex = BinarySearchDeluxe.lastIndexOf(t, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
+        System.out.printf("number of matches was %d", (lIndex - fIndex + 1));
         return (lIndex - fIndex + 1);
     }
 
@@ -37,10 +42,17 @@ public class Autocomplete {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//        USE GUI
         String filename = "";
         int numberOfSuggestions = 10;
         AutocompleteGUI ag = new AutocompleteGUI("wiktionary.txt", numberOfSuggestions);
         ag.setVisible(true);
-    }
-    
+
+//        SPIT OUT MATCHES THROUGH CONSOLE
+//          In in = new In();
+//          while(!in.isEmpty()) {
+//              String q = in.readLine();
+//              System.out.println(Arrays.toString())
+//          }
+ } 
 }
