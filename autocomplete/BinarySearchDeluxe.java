@@ -55,11 +55,6 @@ public class BinarySearchDeluxe {
         }
         return -1; 
      }
-     
-     private static boolean isEnd(Term[] a, int index) {
-         if (index == (a.length - 1)) return true;
-         else return false;
-     }
     
     public static void main(String[] args) {
         // test firstIndexOf method
