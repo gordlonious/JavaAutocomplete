@@ -12,6 +12,11 @@ import java.util.Comparator;
  */
 public class BinarySearchDeluxe {
     // Return the index of the first key in a[] that equals the search key, or -1 if no such key.
+    // lg(n) + k
+        // log(n) because of the partitioning nature of binary search
+        // + k where k is equal to the number of duplicate keys equal to the search key either to the left or right of the initial search hit
+        // // + k happens because binary search will not necessarily find the first or last key when multiple keys compare to be equal
+        // // we have to iterate until we find the first instance of key
     public static int firstIndexOf(Term[] a, Term key, Comparator<Term> comparator) {
         if(a == null || key == null || comparator == null) throw new NullPointerException("Cannot pass null parameters to BindarySearchDeluxe.firstIndexOf method");
         int lo = 0;
@@ -32,6 +37,7 @@ public class BinarySearchDeluxe {
     }
 
     // Return the index of the last key in a[] that equals the search key, or -1 if no such key.
+    // lg(n) + k -- see above explaination for firstIndexOf (must iterate until we find last instance of key)
      public static int lastIndexOf(Term[] a, Term key, Comparator<Term> comparator) {
         if(a == null || key == null || comparator == null) throw new NullPointerException("Cannot pass null parameters to BindarySearchDeluxe.lastIndexOf method");
         int lo = 0;
