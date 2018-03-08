@@ -53,7 +53,7 @@ public class Term implements Comparable<Term> {
             if(n == 1) {
                 st1 =  Character.toString(t1.getQuery().charAt(0));
                 st2 =  Character.toString(t2.getQuery().charAt(0));
-                return st1.compareTo(st2);
+                return st1.compareToIgnoreCase(st2);
             } else {
                 st1 = t1.getQuery().substring(0, (n));
                 st2 = t2.getQuery().substring(0, (n));
