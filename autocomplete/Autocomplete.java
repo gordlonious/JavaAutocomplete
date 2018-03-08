@@ -25,7 +25,7 @@ public class Autocomplete {
     // Return all terms that start with the given prefix, in descending order of weight.
     // ~ 2(log(n) + k) + M
     // // 2(log(n) + k) because one call to firstIndexOf and one call to lastIndexOf (both ~log(n) + k)
-    // // + M because Arrays.copyOfRange is given a range of indexes and must copy each Match (M) to a new Array
+    // // + M because Arrays.copyOfRange is given a range of indexes and must copy `each Match` (M) to a new Array
     public Term[] allMatches(String prefix) { 
         int fIndex = BinarySearchDeluxe.firstIndexOf(t, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
         int lIndex = BinarySearchDeluxe.lastIndexOf(t, new Term(prefix, 0), Term.byPrefixOrder(prefix.length()));
