@@ -22,16 +22,13 @@ public class BinarySearchDeluxe {
         int lo = 0;
         int hi = a.length - 1;
         while(lo <= hi) {
-            int mid = (lo + hi) / 2;
-            if(comparator.compare(key, a[mid]) < 0) hi = mid -1;
+            int mid = lo + (hi - lo) / 2;
+            if(comparator.compare(key, a[mid]) < 0) hi = mid - 1;
             else if (comparator.compare(key, a[mid]) > 0) lo = mid + 1;
-            else if (comparator.compare(key, a[mid]) == 0) {
-                while(!(mid <= 0) && comparator.compare(key, a[(mid-1)]) == 0) {
-                    mid--;
-                }
-                return mid;
+            else { 
+                if(mid > 0 && comparator.compare(key, a[(mid-1)]) == 0) {  hi = mid - 1; }
+                else { return mid; }
             }
-            else System.out.println("SHOULD NOT EVER EXECUTE");
         }
         return -1; 
     }
