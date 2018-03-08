@@ -12,11 +12,9 @@ import java.util.Comparator;
  */
 public class BinarySearchDeluxe {
     // Return the index of the first key in a[] that equals the search key, or -1 if no such key.
-    // lg(n) + k
+    // lg(n) + 1
         // log(n) because of the partitioning nature of binary search
-        // + k where k is equal to the number of duplicate keys equal to the search key either to the left or right of the initial search hit
-        // // + k happens because binary search will not necessarily find the first or last key when multiple keys compare to be equal
-        // // we have to iterate until we find the first instance of key
+        // + 1 because we have to check the item to the left of mid for duplicates that mean we need to keep searching
     public static int firstIndexOf(Term[] a, Term key, Comparator<Term> comparator) {
         if(a == null || key == null || comparator == null) throw new NullPointerException("Cannot pass null parameters to BindarySearchDeluxe.firstIndexOf method");
         int lo = 0;
@@ -34,7 +32,9 @@ public class BinarySearchDeluxe {
     }
 
     // Return the index of the last key in a[] that equals the search key, or -1 if no such key.
-    // lg(n) + k -- see above explaination for firstIndexOf (must iterate until we find last instance of key)
+    // lg(n) + 1
+        // log(n) because of the partitioning nature of binary search
+        // + 1 because we have to check the item to the right of mid for duplicates that mean we need to keep searching
      public static int lastIndexOf(Term[] a, Term key, Comparator<Term> comparator) {
         if(a == null || key == null || comparator == null) throw new NullPointerException("Cannot pass null parameters to BindarySearchDeluxe.lastIndexOf method");
         int lo = 0;
@@ -44,10 +44,8 @@ public class BinarySearchDeluxe {
             if(comparator.compare(key, a[mid]) < 0) hi = mid - 1;
             else if(comparator.compare(key, a[mid]) > 0) lo = mid + 1;
             else {
-                while(!(mid >= (a.length-1)) && comparator.compare(key, a[(mid+1)]) == 0) {
-                    mid++;
-                }
-                return mid;
+                if(!(mid >= (a.length-1)) && comparator.compare(key, a[(mid+1)]) == 0) { lo = mid + 1; }
+                else { return mid; }
             }
         }
         return -1; 
