@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package autocomplete;
 
 import java.util.Arrays;
-import edu.princeton.cs.algs4.In;
-
 /**
  *
  * @author gordl
@@ -61,25 +54,5 @@ public class Autocomplete {
         int numberOfSuggestions = 10;
         AutocompleteGUI ag = new AutocompleteGUI("wiktionary.txt", numberOfSuggestions);
         ag.setVisible(true);
-
-//        SPIT OUT MATCHES THROUGH CONSOLE
-//          In in = new In();
-//          while(!in.isEmpty()) {
-//              String q = in.readLine();
-//              System.out.println(Arrays.toString())
-//          }
-
-        //figure out copyOfRange
-//        Term[] t1 = new Term[6];
-//        t1[0] = new Term ("Test", 50);
-//        t1[1] = new Term("query", 5);
-//        t1[2] = new Term("abcd", 100);
-//        t1[3] = new Term("abzz", 24);
-//        t1[4] = new Term("Wayward Soul", 50);
-//        t1[5] = new Term ("Test Data", 50);
-//        Term[] t2 = Arrays.copyOfRange(t1, 0, 1);
-//        for (Term trm : t2) {
-//            System.out.println(trm.toString());
-//        }
  } 
 }
