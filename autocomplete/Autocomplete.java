@@ -50,9 +50,9 @@ public class Autocomplete {
      */
     public static void main(String[] args) {
 //        USE GUI
-        String filename = "";
+        String filename = (args.length > 0) ? args[0] : "wiktionary.txt";
         int numberOfSuggestions = 10;
-        AutocompleteGUI ag = new AutocompleteGUI("wiktionary.txt", numberOfSuggestions);
+        AutocompleteGUI ag = new AutocompleteGUI(filename, numberOfSuggestions);
         ag.setVisible(true);
  } 
 }
